@@ -1,0 +1,18 @@
+<!DOCTYPE module SYSTEM "module.dtd">
+
+<module name="chuck" dir="chuck_demo">
+  <doc>
+    <description>demo for chuck</description>
+  </doc>
+  <header>
+    <file name="chuck.h"/>
+  </header>
+  <init fun="initchuck()"/>
+  <periodic fun="periodic_1Hz_demo()" freq="1." start="start_demo()" stop="stop_demo()"/>
+  <event fun="flyafter10secs()"/>
+  <datalink message="helloworld" fun="datalinkcallback"/>
+  <makefile>
+    <file name="chuck.c"/>
+  </makefile>
+</module>
+

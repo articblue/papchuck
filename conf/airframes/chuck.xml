@@ -1,0 +1,13 @@
+<!DOCTYPE airframe SYSTEM "airframe.dtd">
+<!-- this is a quadrotor frame equiped with Lisa/M and MKK motor controllers -->
+<airframe name="chuck">
+  <firmware name="rotorcraft">
+    <target name="ap" board="lisa_m_1.0">
+    </target>
+  </firmware>
+  <modules main_freq="60">
+    <load name="chuck.xml"/>
+  </modules>
+</airframe>
+
+
