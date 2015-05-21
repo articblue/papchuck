@@ -27,7 +27,6 @@
 
 #ifndef MAIN_H
 #define MAIN_H
-#define RADIO_CONTROL 1
 #ifdef SITL
 #define STATIC_INLINE extern
 #else
