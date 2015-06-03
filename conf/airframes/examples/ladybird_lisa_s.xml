@@ -219,6 +219,10 @@
 
       <configure name="AHRS_PROPAGATE_FREQUENCY" value="500"/>
       <define name="USE_PERSISTENT_SETTINGS" value="TRUE"/>
+      <define name="USE_GPS" value="FALSE"/>
+	<!--TRUE"/-->
+      <define name="USE_AHRS_ALIGNER" value="TRUE"/>
+      <define name="USE_AHRS" value="TRUE"/>
     </target>
 
     <target name="nps" board="pc">
