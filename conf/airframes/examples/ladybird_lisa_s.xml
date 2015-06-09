@@ -198,7 +198,7 @@
  </section>
 
  <modules main_freq="512">
-   <load name="gps_ubx_ucenter.xml"/>
+   <!--load name="gps_ubx_ucenter.xml"/-->
    <load name="send_imu_mag_current.xml"/>
  </modules>
 
@@ -221,9 +221,8 @@
       <define name="USE_PERSISTENT_SETTINGS" value="TRUE"/>
       <define name="USE_GPS" value="FALSE"/>
       <define name="GPS_FIX_NONE" value="0x00"/>
+      <define name="GPS_DATALINK" value="FALSE"/>
 	<!--TRUE"/-->
-      <define name="USE_AHRS_ALIGNER" value="TRUE"/>
-      <define name="USE_AHRS" value="TRUE"/>
       <define name="USE_BAROMETER" value="TRUE"/>
     </target>
 
