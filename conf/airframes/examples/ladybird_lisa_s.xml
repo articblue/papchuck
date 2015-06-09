@@ -220,6 +220,7 @@
       <configure name="AHRS_PROPAGATE_FREQUENCY" value="500"/>
       <define name="USE_PERSISTENT_SETTINGS" value="TRUE"/>
       <define name="USE_GPS" value="FALSE"/>
+      <define name="GPS_FIX_NONE" value="0x00"/>
 	<!--TRUE"/-->
       <define name="USE_AHRS_ALIGNER" value="TRUE"/>
       <define name="USE_AHRS" value="TRUE"/>
@@ -250,7 +251,7 @@
     <subsystem name="imu" type="lisa_s_v1.0">
       <define name="LISA_S_UPSIDE_DOWN"/> <!-- Upside down is a relative term. :) -->
     </subsystem>
-    <subsystem name="gps" type="ublox"/>
+    <!--subsystem name="gps" type="ublox"/-->
     <subsystem name="stabilization" type="int_quat"/>
     <subsystem name="ahrs" type="int_cmpl_quat"/>
     <subsystem name="ins"/>

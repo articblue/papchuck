@@ -8,10 +8,10 @@
     <waypoint name="HOME" x="0.0" y="0.0"/>
     <waypoint name="CLIMB" x="0.0" y="0.0"/>
     <waypoint name="STDBY" x="0.0" y="0.0"/>
-    <waypoint name="p1" x="10.5" y="10.5"/>
-    <waypoint name="p2" x="-10.5" y="10.5"/>
-    <waypoint name="p3" x="-10.5" y="-10.5"/>
-    <waypoint name="p4" x="10.5" y="-10.5"/>
+    <waypoint name="p1" x="5.0" y="5.0"/>
+    <waypoint name="p2" x="-5.0" y="5.0"/>
+    <waypoint name="p3" x="-5.0" y="-5.0"/>
+    <waypoint name="p4" x="5.0" y="-5.0"/>
     <!--waypoint name="CAM" x="-20" y="-50" height="2."/-->
     <!--waypoint name="TD" x="5.6" y="-10.9"/-->
     <waypoint name="TD" x="0.0" y="0.0"/>
@@ -25,11 +25,11 @@
       <call fun="NavSetGroundReferenceHere()"/> 
       <call fun="NavSetAltitudeReferenceHere()"/>
     </block-->
-    <!--block name="Geo init">
+    <block name="Ground init">
       <while cond="LessThan(NavBlockTime(), 10)"/>
       <call fun="NavSetGroundReferenceHere()"/> 
-      <<call fun="NavSetAltitudeReferenceHere()"/>
-    </block-->
+      <!--<call fun="NavSetAltitudeReferenceHere()"/-->
+    </block>
     <!--block name="Holding point">
       <call fun="NavKillThrottle()"/>
       <attitude pitch="0" roll="0" throttle="0" vmode="throttle" until="FALSE"/>
@@ -42,7 +42,7 @@
       <call fun="NavResurrect()"/>
       <exception cond="stateGetPositionEnu_f()->z > 5.0" deroute="Standby"/>
       <call fun="NavSetWaypointHere(WP_CLIMB)"/>
-      <stay vmode="climb" climb="3.0" wp="CLIMB"/>
+      <stay vmode="climb" climb="1.0" wp="CLIMB"/>
     </block>
     <block name="Standby" strip_button="Standby" strip_icon="home.png">
       <go wp="STDBY"/>

@@ -37,6 +37,7 @@
 #include "subsystems/datalink/telemetry.h"
 #include "firmwares/rotorcraft/navigation.h"
 #include "firmwares/rotorcraft/guidance.h"
+#include "../airborne/mcu_periph/sys_time.h"
 
 #include "firmwares/rotorcraft/stabilization.h"
 #include "firmwares/rotorcraft/stabilization/stabilization_none.h"
@@ -45,10 +46,13 @@
 
 #include "generated/settings.h"
 
+
+
 #if USE_GPS
 #include "subsystems/gps.h"
 #else
 #define GpsIsLost() TRUE
+#define GPS_FIX_NONE 0x00
 #endif
 
 #ifdef POWER_SWITCH_GPIO
