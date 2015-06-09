@@ -224,6 +224,7 @@
 	<!--TRUE"/-->
       <define name="USE_AHRS_ALIGNER" value="TRUE"/>
       <define name="USE_AHRS" value="TRUE"/>
+      <define name="USE_BAROMETER" value="TRUE"/>
     </target>
 
     <target name="nps" board="pc">
