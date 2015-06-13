@@ -4,6 +4,7 @@
   <header>
 #include "autopilot.h"
   </header>
+
   <waypoints>
     <waypoint name="HOME" x="0.0" y="0.0"/>
     <waypoint name="CLIMB" x="0.0" y="0.0"/>
@@ -12,85 +13,38 @@
     <waypoint name="p2" x="-5.0" y="5.0"/>
     <waypoint name="p3" x="-5.0" y="-5.0"/>
     <waypoint name="p4" x="5.0" y="-5.0"/>
-    <!--waypoint name="CAM" x="-20" y="-50" height="2."/-->
-    <!--waypoint name="TD" x="5.6" y="-10.9"/-->
     <waypoint name="TD" x="0.0" y="0.0"/>
   </waypoints>
+
+  <exceptions>
+    <exception cond="And(block_time>20, dist2_to_home > 50.*50.)" deroute="HOME"/>
+    <exception cond="And(block_time>20, dist2_to_home > 60.*60.)" deroute="kill"/>
+  </exceptions>
+
   <blocks>
-    <!--block name="Wait GPS">
+
+    <block name="kill">
+      <go wp="HOME" vmode="throttle" throttle="0" pitch="0"/>
+    </block>
+ <block name="Wait GPS">
       <call fun="NavKillThrottle()"/>
       <while cond="!GpsFixValid()"/>
-    </block-->
-    <!--block name="Ground Init">
-      <call fun="NavSetGroundReferenceHere()"/> 
-      <call fun="NavSetAltitudeReferenceHere()"/>
-    </block-->
-    <block name="Ground init">
-      <while cond="LessThan(NavBlockTime(), 10)"/>
-      <call fun="NavSetGroundReferenceHere()"/> 
-      <!--<call fun="NavSetAltitudeReferenceHere()"/-->
     </block>
-    <!--block name="Holding point">
-      <call fun="NavKillThrottle()"/>
-      <attitude pitch="0" roll="0" throttle="0" vmode="throttle" until="FALSE"/>
-    </block-->
-    <!--block name="Start Engine">
-      <call fun="NavResurrect()"/>
-      <attitude pitch="0" roll="0" throttle="0" vmode="throttle" until="FALSE"/>
-    </block-->
+    <block name="Geo init">
+      <while cond="LessThan(NavBlockTime(), 10)"/>
+      <call fun="NavSetGroundReferenceHere()"/>
+      <!--<call fun="NavSetAltitudeReferenceHere()"/>-->
+    </block>
     <block name="Takeoff" strip_button="Takeoff" strip_icon="takeoff.png">
       <call fun="NavResurrect()"/>
-      <exception cond="stateGetPositionEnu_f()->z > 5.0" deroute="Standby"/>
+      <exception cond="stateGetPositionEnu_f()->z > 25.0" deroute="circlehome"/>
       <call fun="NavSetWaypointHere(WP_CLIMB)"/>
       <stay vmode="climb" climb="1.0" wp="CLIMB"/>
     </block>
-    <block name="Standby" strip_button="Standby" strip_icon="home.png">
-      <go wp="STDBY"/>
-      <while cond="LessThan(NavBlockTime(), 5)"/>
+
+    <block name="circlehome">
+      <circle wp="HOME" radius="5"/>
     </block>
-    <!--block name="stay_p1">
-      <stay wp="p1"/>
-    </block-->
-    <!--block name="go_p2">
-      <call fun="nav_set_heading_deg(90)"/>
-      <go wp="p2"/>
-      <deroute block="stay_p1"/>
-    </block-->
-    <!--block name="line_p1_p2">
-      <go from="p1" hmode="route" wp="p2"/>
-      <stay wp="p2" until="stage_time>10"/>
-      <go from="p2" hmode="route" wp="p1"/>
-      <deroute block="stay_p1"/>
-    </block-->
-    <block name="route">
-      <go from="HOME" hmode="route" wp="p1"/>
-      <go from="p1" hmode="route" wp="p2"/>
-      <go from="p2" hmode="route" wp="p3"/>
-      <go from="p3" hmode="route" wp="p4"/>
-      <go from="p4" hmode="route" wp="p1"/>
-      <go from="p1" hmode="route" wp="HOME"/>
-      <deroute block="land"/>
-    </block>
-    <!--block name="stay_p1">
-      <go wp="TD"/>
-    </block-->
-    <!--block name="circle CAM" pre_call="nav_set_heading_towards_waypoint(WP_CAM)">
-      <circle radius="nav_radius" wp="CAM"/>
-    </block-->
-    <block name="land here" strip_button="Land Here" strip_icon="land-right.png">
-      <call fun="NavSetWaypointHere(WP_TD)"/>
-    </block>
-    <block name="land">
-      <go wp="TD"/>
-    </block>
-    <!--block name="flare">
-      <exception cond="NavDetectGround()" deroute="Holding point"/>
-      <exception cond="!nav_is_in_flight()" deroute="landed"/>
-      <call fun="NavStartDetectGround()"/>
-      <stay climb="-0.8" vmode="climb" wp="TD"/>
-    </block-->
-    <block name="landed">
-      <attitude pitch="0" roll="0" throttle="0" vmode="throttle" until="FALSE"/>
-    </block>
+
   </blocks>
 </flight_plan>

@@ -1,7 +1,5 @@
 <!DOCTYPE autopilot SYSTEM "autopilot.dtd">
-
-<autopilot name="Quadrotor Autopilot (Basic version)">
-
+<autopilot name="Quadrotor Autopilot (Basic version)" lat0="43 33 50.83" lon0="1 28 52.61"/>
   <state_machine name="main" freq="PERIODIC_FREQUENCY" gcs_mode="true" settings_mode="true">
 
     <control_block name="set_actuators">

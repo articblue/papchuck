@@ -23,9 +23,6 @@
     <block name="circle left home">
       <circle radius="-75" wp="HOME"/>
     </block>
-    <block name="climb 75">
-      <circle radius="50+(GetPosAlt()-GetAltRef())/2" wp="1" throttle="0.75" pitch="15" vmode="throttle" until="10>PowerVoltage()"/>
-    </block>
     <block name="stack 1">
       <circle radius="GetPosAlt()/2" wp="1"/>
     </block>
@@ -42,9 +39,6 @@
     </block>
     <block name="stack 2">
       <circle radius="75" wp="2"/>
-    </block>
-    <block name="survey">
-      <survey_rectangle grid="150" wp1="S1" wp2="S2"/>
     </block>
   </blocks>
 </flight_plan>

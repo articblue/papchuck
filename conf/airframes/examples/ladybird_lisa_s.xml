@@ -127,8 +127,8 @@
     <define name="SP_MAX_PSI" value="45." unit="deg"/>
     <define name="SP_MAX_R" value="90." unit="deg/s"/>
     <define name="SP_MAX_P" value="90." unit="deg/s"/>
-    <define name="DEADBAND_R" value="250"/>
-    <define name="DEADBAND_A" value="250"/>
+    <define name="DEADBAND_R" value="25"/>
+    <define name="DEADBAND_A" value="25"/>
 
     <!-- reference -->
     <define name="REF_OMEGA_P" value="800" unit="deg/s"/>
@@ -147,22 +147,22 @@
     <define name="REF_MAX_RDOT" value="RadOfDeg(900.)"/>
 
     <!-- feedback -->
-    <define name="PHI_PGAIN" value="400"/>
-    <define name="PHI_DGAIN" value="200"/>
+    <define name="PHI_PGAIN" value="200"/>
+    <define name="PHI_DGAIN" value="0"/>
     <define name="PHI_IGAIN" value="100"/>
 
-    <define name="THETA_PGAIN" value="400"/>
-    <define name="THETA_DGAIN" value="200"/>
+    <define name="THETA_PGAIN" value="200"/>
+    <define name="THETA_DGAIN" value="0"/>
     <define name="THETA_IGAIN" value="100"/>
 
-    <define name="PSI_PGAIN" value="500"/>
-    <define name="PSI_DGAIN" value="300"/>
-    <define name="PSI_IGAIN" value="10"/>
+    <define name="PSI_PGAIN" value="200"/>
+    <define name="PSI_DGAIN" value="0"/>
+    <define name="PSI_IGAIN" value="100"/>
 
     <!-- feedforward -->
     <define name="PHI_DDGAIN" value="0"/>
     <define name="THETA_DDGAIN" value="0"/>
-    <define name="PSI_DDGAIN" value=" 300"/>
+    <define name="PSI_DDGAIN" value=" 0"/>
 
     <define name="PHI_AGAIN" value="0"/>
     <define name="THETA_AGAIN" value="0"/>
@@ -198,7 +198,7 @@
  </section>
 
  <modules main_freq="512">
-   <!--load name="gps_ubx_ucenter.xml"/-->
+   <load name="gps_ubx_ucenter.xml"/>
    <load name="send_imu_mag_current.xml"/>
  </modules>
 
@@ -219,9 +219,9 @@
 
       <configure name="AHRS_PROPAGATE_FREQUENCY" value="500"/>
       <define name="USE_PERSISTENT_SETTINGS" value="TRUE"/>
-      <define name="USE_GPS" value="FALSE"/>
+      <!--define name="USE_GPS" value="FALSE"/>
       <define name="GPS_FIX_NONE" value="0x00"/>
-      <define name="GPS_DATALINK" value="FALSE"/>
+      <define name="GPS_DATALINK" value="FALSE"/-->
 	<!--TRUE"/-->
       <define name="USE_BAROMETER" value="TRUE"/>
     </target>
@@ -251,9 +251,10 @@
     <subsystem name="imu" type="lisa_s_v1.0">
       <define name="LISA_S_UPSIDE_DOWN"/> <!-- Upside down is a relative term. :) -->
     </subsystem>
-    <!--subsystem name="gps" type="ublox"/-->
+    <subsystem name="gps" type="ublox"/>
     <subsystem name="stabilization" type="int_quat"/>
     <subsystem name="ahrs" type="int_cmpl_quat"/>
-    <subsystem name="ins"/>
+    <subsystem name="ins"/><!-- USe this with USE_GPS=FALSE  Causes system to not use GPS-->
+    <!-- Possibly use with type="extended" for ins to get ver pos, vert speed accel bias, barometric offset-->
   </firmware>
 </airframe>
